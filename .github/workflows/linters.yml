@@ -1,48 +1,82 @@
-name: Linters
-
-on: pull_request
-
-env:
-  FORCE_COLOR: 1
-
+name: GitHub Actions Demo
+on: [push]
 jobs:
-  lighthouse:
-    name: Lighthouse
-    runs-on: ubuntu-18.04
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - name: Setup Lighthouse
-        run: npm install -g @lhci/cli@0.7.x
-      - name: Lighthouse Report
-        run: lhci autorun --upload.target=temporary-public-storage --collect.staticDistDir=.
-  webhint:
-    name: Webhint
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - name: Setup Webhint
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
         run: |
-          npm install --save-dev hint@6.x
-          [ -f .hintrc ] || wget https://raw.githubusercontent.com/microverseinc/linters-config/master/html-css/.hintrc
-      - name: Webhint Report
-        run: npx hint .
-  stylelint:
-    name: Stylelint
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - name: Setup Stylelint
-        run: |
-          npm install --save-dev stylelint@13.x stylelint-scss@3.x stylelint-config-standard@21.x stylelint-csstree-validator@1.x
-          [ -f .stylelintrc.json ] || wget https://raw.githubusercontent.com/microverseinc/linters-config/master/html-css/.stylelintrc.json
-      - name: Stylelint Report
-        run: npx stylelint "**/*.{css,scss}"
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+Scroll to the bottom of the page and select Create a new branch for this commit and start a pull request. Then, to create a pull request, click Propose new file.
+Commit workflow file
+
+Committing the workflow file to a branch in your repository triggers the push event and runs your workflow.
+
+Viewing your workflow results
+On GitHub.com, navigate to the main page of the repository.
+
+Under your repository name, click  Actions.
+Actions tab in the main repository navigation
+
+In the left sidebar, click the workflow you want to see.
+
+Workflow list in left sidebar
+
+From the list of workflow runs, click the name of the run you want to see.
+
+Name of workflow run
+
+Under Jobs , click the Explore-GitHub-Actions job.
+
+Locate job
+
+The log shows you how each of the steps was processed. Expand any of the steps to view its details.
+
+Example workflow results
+
+For example, you can see the list of files in your repository:
+Example action detail
+
+More starter workflows
+GitHub provides preconfigured starter workflow that you can customize to create your own continuous integration workflow. GitHub analyzes your code and shows you CI starter workflow that might be useful for your repository. For example, if your repository contains Node.js code, you'll see suggestions for Node.js projects. You can use starter workflow as a starting place to build your custom workflow or use them as-is.
+
+You can browse the full list of starter workflow in the actions/starter-workflows repository.
+
+Next steps
+The example workflow you just added runs each time code is pushed to the branch, and shows you how GitHub Actions can work with the contents of your repository. But this is only the beginning of what you can do with GitHub Actions:
+
+Your repository can contain multiple workflows that trigger different jobs based on different events.
+You can use a workflow to install software testing apps and have them automatically test your code on GitHub's runners.
+GitHub Actions can help you automate nearly every aspect of your application development processes. Ready to get started? Here are some helpful resources for taking your next steps with GitHub Actions:
+
+"Learn GitHub Actions" for an in-depth tutorial.
+Did this doc help you?
+Privacy policy
+Help us make these docs great!
+All GitHub docs are open source. See something that's wrong or unclear? Submit a pull request.
+
+Or, learn how to contribute.
+
+Still need help?
+Ask the GitHub community
+Contact support
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+Developer API
+Training
+Blog
+About
